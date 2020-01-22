@@ -34,7 +34,7 @@ var getColor = function () {
   return hsl;
 };
 
-window.renderStatistics = function (ctx, players, times) {
+window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, 110, 20, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, 100, 10, '#ffffff');
 
@@ -45,18 +45,18 @@ window.renderStatistics = function (ctx, players, times) {
 
   var maxTime = getMaxElement(times);
 
-  for (var i = 0; i < players.length; i++) {
+  for (var i = 0; i < names.length; i++) {
     ctx.fillStyle = '#000000';
-    ctx.fillText(players[i], COLUMN_X + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, 260);
+    ctx.fillText(names[i], COLUMN_X + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, 260);
     ctx.fillText(Math.round(times[i]), COLUMN_X + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, COLUMN_Y - ((COLUMN_HEIGHT * times[i]) / maxTime) - 5);
 
-    if (players[i] !== times[i]) {
+    if (names[i] !== times[i]) {
       ctx.fillStyle = '#000';
       ctx.fillRect(COLUMN_X + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, COLUMN_Y - 5, COLUMN_WIDTH, 5);
     }
 
     var columnColor;
-    if (players[i] === 'Вы') {
+    if (names[i] === 'Вы') {
       columnColor = 'rgba(255, 0, 0, 1)';
     } else {
       columnColor = getColor();
