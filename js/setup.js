@@ -5,9 +5,10 @@ var PERSON_SURNAME = ['да Марья', 'Верон', 'Мирабелла', 'В
 var PERSON_COAT = ['rgb (101, 137, 164)', 'rgb (241, 43, 107)', 'rgb (146, 100, 161)', 'rgb (56, 159, 117)', 'rgb (215, 210, 55)', 'rgb (0, 0, 0)'];
 var PERSON_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
 
-var generateRandomNumber = function (min, max) {
-  var randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
-  return randomNumber;
+
+var generateRandomValue = function (min, max) {
+  var randomValue = Math.floor(Math.random() * (max - min + 1) + min);
+  return randomValue;
 };
 
 var generateUniqueArr = function (arr) {
@@ -36,11 +37,11 @@ var generateRandomArr = function (length, arr) {
   if (length === 1) {
     var newArrLength = minLength;
   } else {
-    newArrLength = generateRandomNumber(minLength, maxLength);
+    newArrLength = generateRandomValue(minLength, maxLength);
   }
 
   while (newArr.length < newArrLength) {
-    var newArrElementIndex = generateRandomNumber(0, maxLength - 1);
+    var newArrElementIndex = generateRandomValue(0, maxLength - 1);
     newArr.push(newArrElementIndex);
   }
 
@@ -60,7 +61,7 @@ var generatePersonArr = function (length) {
 
   while (personArr.length < maxLength) {
     var person = {
-      name: generateRandomArr(8, PERSON_NAME) + ' ' + generateRandomArr(8, PERSON_SURNAME),
+      name: generateRandomArr(1, PERSON_NAME) + ' ' + generateRandomArr(1, PERSON_SURNAME),
       coatColor: generateRandomArr(1, PERSON_COAT),
       eyesColor: generateRandomArr(1, PERSON_EYES)
     };
