@@ -41,12 +41,13 @@ var generateRandomArr = function (length, arr) {
   var minLength = 1;
   var maxLength = arr.length;
   var newArrLength = minLength;
+  var newArr = arr.splice(generateRandomValue(0, maxLength - 1), newArrLength);
 
   if (length !== minLength) {
     newArrLength = generateRandomValue(minLength, maxLength);
+    newArr = arr.splice(0, newArrLength);
   }
 
-  var newArr = arr.splice(0, newArrLength);
   var uniqueArr = getUniqueArrayItems(newArr);
 
   return uniqueArr;
