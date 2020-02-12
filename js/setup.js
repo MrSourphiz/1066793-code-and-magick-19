@@ -117,18 +117,20 @@ var generateRandomValue = function (min, max) {
   return randomValue;
 };
 
-var generateUniqueArr = function (arr) {
+var getUniqueArrayItems = function (arr) {
   var uniqueArr = [];
+  var isUnique;
   for (var i = 0; i < arr.length; i++) {
-    var number = arr[i];
-    var hitCounter = 0;
     for (var j = 0; j < arr.length; j++) {
-      if (number === arr[j]) {
-        hitCounter++;
+      if (i !== j && arr[i] === arr[j]) {
+        isUnique = false;
+        break;
+      } else {
+        isUnique = true;
       }
     }
-    if (hitCounter === 1) {
-      uniqueArr.push(number);
+    if (isUnique) {
+      uniqueArr.push(arr[i]);
     }
   }
 
@@ -138,27 +140,17 @@ var generateUniqueArr = function (arr) {
 var generateRandomArr = function (length, arr) {
   var minLength = 1;
   var maxLength = arr.length;
-  var newArr = [];
+  var newArrLength = minLength;
+  var newArr = arr.splice(generateRandomValue(0, maxLength - 1), newArrLength);
 
-  if (length === 1) {
-    var newArrLength = minLength;
-  } else {
+  if (length !== minLength) {
     newArrLength = generateRandomValue(minLength, maxLength);
+    newArr = arr.splice(0, newArrLength);
   }
 
-  while (newArr.length < newArrLength) {
-    var newArrElementIndex = generateRandomValue(0, maxLength - 1);
-    newArr.push(newArrElementIndex);
-  }
+  var uniqueArr = getUniqueArrayItems(newArr);
 
-  var uniqueArr = generateUniqueArr(newArr);
-  var valueArr = [];
-  for (var i = 0; i < uniqueArr.length; i++) {
-    var uniqueArrIndex = uniqueArr[i];
-    valueArr.push(arr[uniqueArrIndex]);
-  }
-
-  return valueArr;
+  return uniqueArr;
 };
 
 var generatePersonArr = function (length) {
