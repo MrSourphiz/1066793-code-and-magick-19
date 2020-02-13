@@ -95,19 +95,19 @@ setupSubmitButton.addEventListener('keydown', function (evt) {
 });
 
 wizardCoat.addEventListener('click', function () {
-  var coatColor = generateRandomArr(1, PERSON_COAT);
+  var coatColor = getRandomElement(PERSON_COAT);
   wizardCoat.style.fill = coatColor;
   wizardCoatInput.value = coatColor;
 });
 
 wizardEyes.addEventListener('click', function () {
-  var eyesColor = generateRandomArr(1, PERSON_EYES);
+  var eyesColor = getRandomElement(PERSON_EYES);
   wizardEyes.style.fill = eyesColor;
   wizardEyesInput.value = eyesColor;
 });
 
 wizardFireball.addEventListener('click', function () {
-  var fireballColor = generateRandomArr(1, PERSON_FIREBALL);
+  var fireballColor = getRandomElement(PERSON_FIREBALL);
   wizardFireball.style.backgroundColor = fireballColor;
   wizardFireballInput.value = fireballColor;
 });
@@ -117,40 +117,11 @@ var generateRandomValue = function (min, max) {
   return randomValue;
 };
 
-var getUniqueArrayItems = function (arr) {
-  var uniqueArr = [];
-  var isUnique;
-  for (var i = 0; i < arr.length; i++) {
-    for (var j = 0; j < arr.length; j++) {
-      if (i !== j && arr[i] === arr[j]) {
-        isUnique = false;
-        break;
-      } else {
-        isUnique = true;
-      }
-    }
-    if (isUnique) {
-      uniqueArr.push(arr[i]);
-    }
-  }
+var getRandomElement = function (arr) {
+  var randomIndex = generateRandomValue(0, arr.length - 1);
+  var randomElement = arr[randomIndex];
 
-  return uniqueArr;
-};
-
-var generateRandomArr = function (length, arr) {
-  var minLength = 1;
-  var maxLength = arr.length;
-  var newArrLength = minLength;
-  var newArr = arr.splice(generateRandomValue(0, maxLength - 1), newArrLength);
-
-  if (length !== minLength) {
-    newArrLength = generateRandomValue(minLength, maxLength);
-    newArr = arr.splice(0, newArrLength);
-  }
-
-  var uniqueArr = getUniqueArrayItems(newArr);
-
-  return uniqueArr;
+  return randomElement;
 };
 
 var generatePersonArr = function (length) {
@@ -159,9 +130,9 @@ var generatePersonArr = function (length) {
 
   while (personArr.length < maxLength) {
     var person = {
-      name: generateRandomArr(1, PERSON_NAME) + ' ' + generateRandomArr(1, PERSON_SURNAME),
-      coatColor: generateRandomArr(1, PERSON_COAT),
-      eyesColor: generateRandomArr(1, PERSON_EYES)
+      name: getRandomElement(PERSON_NAME) + ' ' + getRandomElement(PERSON_SURNAME),
+      coatColor: getRandomElement(PERSON_COAT),
+      eyesColor: getRandomElement(PERSON_EYES)
     };
     personArr.push(person);
   }
