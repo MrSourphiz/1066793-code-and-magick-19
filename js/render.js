@@ -16,9 +16,11 @@
 
   var fragment = document.createDocumentFragment();
   var wizards = window.randomization.personArr(4);
-  for (var i = 0; i < wizards.length; i++) {
-    fragment.appendChild(renderWizard(wizards[i]));
-  }
+
+  wizards.forEach(function (item, index) {
+    fragment.appendChild(renderWizard(wizards[index]));
+  });
+
   similarListElement.appendChild(fragment);
 
   userDialog.querySelector('.setup-similar').classList.remove('hidden');

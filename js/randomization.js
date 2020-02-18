@@ -8,9 +8,8 @@
 
   var getRandomElement = function (arr) {
     var randomIndex = generateRandomValue(0, arr.length - 1);
-    var randomElement = arr[randomIndex];
 
-    return randomElement;
+    return arr[randomIndex];
   };
 
   var generatePersonArr = function (length) {
