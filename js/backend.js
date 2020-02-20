@@ -1,9 +1,12 @@
 'use strict';
 
 (function () {
-  var URL = 'https://js.dump.academy/code-and-magick';
-  var DATA_URL = 'https://js.dump.academy/code-and-magick/data';
   var TIMEOUT_IN_MS = 10000;
+
+  var url = {
+    LOAD: 'https://js.dump.academy/code-and-magick/data',
+    SAVE: 'https://js.dump.academy/code-and-magick'
+  };
   var statusCode = {
     SUCCESS: 200,
     BAD_REQUEST: 400,
@@ -42,7 +45,7 @@
 
     xhr.timeout = TIMEOUT_IN_MS;
 
-    xhr.open('GET', DATA_URL);
+    xhr.open('GET', url.LOAD);
     xhr.send();
   };
 
@@ -77,7 +80,7 @@
 
     xhr.timeout = TIMEOUT_IN_MS;
 
-    xhr.open('POST', URL);
+    xhr.open('POST', url.SAVE);
     xhr.send(data);
   };
 
