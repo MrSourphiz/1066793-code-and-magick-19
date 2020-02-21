@@ -9,6 +9,22 @@
   var setupSubmitButton = userDialog.querySelector('.setup-submit');
   var setupWizardForm = userDialog.querySelector('.setup-wizard-form');
 
+  var successHandler = function () {
+    userDialog.classList.add('hidden');
+  };
+
+  var errorHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 200; margin: 0 auto; text-align: center; background-color: black; border: 5px solid red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
   var onEscPress = function (evt) {
     if (evt.key === window.constants.ESC_KEY) {
       onClickSetupClose();
@@ -39,14 +55,14 @@
     }
   });
 
-  var onClickSubmitButton = function () {
-    setupWizardForm.submit();
-  };
-
-  setupSubmitButton.addEventListener('click', onClickSubmitButton);
   setupSubmitButton.addEventListener('keydown', function (evt) {
     if (evt.key === window.constants.ENTER_KEY) {
-      onClickSubmitButton();
+      window.backend.save(new FormData(setupWizardForm), successHandler, errorHandler);
     }
+  });
+
+  setupWizardForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(setupWizardForm), successHandler, errorHandler);
   });
 })();
