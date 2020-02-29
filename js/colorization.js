@@ -14,11 +14,7 @@
   var wizard = {
     onEyesChange: function () {},
     onCoatChange: function () {}
-  }
-
-  var coatColor;
-  var eyesColor;
-  var wizards = [];
+  };
 
   wizardCoat.addEventListener('click', function () {
     var newColor = window.randomization.element(window.constants.PERSON_COAT);

@@ -3,7 +3,6 @@
 (function () {
   var coatColor;
   var eyesColor;
-  var lastTimeout;
   var wizards = [];
 
   var getRank = function (wizard) {
